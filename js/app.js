@@ -195,7 +195,7 @@ qwerty.addEventListener('click', button => {
                 // if null, adds 1 to (missed) counter, sets new attribute to lostheart.png, and adds one to (e) counter
                 if (check === null) {
                     missed += 1;
-                    heart = document.getElementsByTagName('img')[e].setAttribute('src', 'images/LostHeart.png');
+                    heart = document.getElementsByTagName('img')[e].setAttribute('src', 'images/lostHeart.png');
                     e += 1;  
                 }
     
