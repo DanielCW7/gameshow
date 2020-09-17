@@ -56,7 +56,9 @@ button {
   transition: var(--transition);
 }
 
-
+img {
+  height: 35px;
+}
 
 
 .main-container {
