@@ -11,70 +11,94 @@
     <div class="main-container">
       <div id="overlay" class="start">
         <h2 class="title" id="winDisplay">Wheel of Success</h2>
-        <a class="btn__reset">Start Game</a>
+        <sub> (Basically Jeopardy) </sub>
+        <button id="btn_reset">Start Game</button>
       </div>
 
-      <div id="banner" class="section">
-        <h2 class="header">Wheel of Success</h2>
+      
+      <div id="section">
+        <span class="hint_box">
+          <p> Hint: </p>
+          <p id="hint">
+            <!-- for the hint -->
+          </p>         
+      </span>
+       
+        <ul id="phrase">
+          <!-- for the phrase -->
+        </ul>
+
+        <ul class="keyrow">
+          <li class="key" onclick=handleClick(this)>Q</li>
+          <li class="key" onclick=handleClick(this)>W</li>
+          <li class="key" onclick=handleClick(this)>E</li>
+          <li class="key" onclick=handleClick(this)>R</li>
+          <li class="key" onclick=handleClick(this)>T</li>
+          <li class="key" onclick=handleClick(this)>Y</li>
+          <li class="key" onclick=handleClick(this)>U</li>
+          <li class="key" onclick=handleClick(this)>I</li>
+          <li class="key" onclick=handleClick(this)>O</li>
+          <li class="key" onclick=handleClick(this)>P</li>
+        </ul>
+        <ul class="keyrow">
+          <li class="key" onclick=handleClick(this)>A</li>
+          <li class="key" onclick=handleClick(this)>S</li>
+          <li class="key" onclick=handleClick(this)>D</li>
+          <li class="key" onclick=handleClick(this)>F</li>
+          <li class="key" onclick=handleClick(this)>G</li>
+          <li class="key" onclick=handleClick(this)>H</li>
+          <li class="key" onclick=handleClick(this)>J</li>
+          <li class="key" onclick=handleClick(this)>K</li>
+          <li class="key" onclick=handleClick(this)>L</li>
+        </ul>
+        <ul class="keyrow">
+          <li class="key" onclick=handleClick(this)>Z</li>
+          <li class="key" onclick=handleClick(this)>X</li>
+          <li class="key" onclick=handleClick(this)>C</li>
+          <li class="key" onclick=handleClick(this)>V</li>
+          <li class="key" onclick=handleClick(this)>B</li>
+          <li class="key" onclick=handleClick(this)>N</li>
+          <li class="key" onclick=handleClick(this)>M</li>
+        </ul>
       </div>
 
-      <div id="phrase" class="section">
-        <ul></ul>
-      </div>
 
-      <div id="qwerty" class="section">
-        <div class="keyrow">
-          <button>q</button>
-          <button>w</button>
-          <button>e</button>
-          <button>r</button>
-          <button>t</button>
-          <button>y</button>
-          <button>u</button>
-          <button>i</button>
-          <button>o</button>
-          <button>p</button>
-        </div>
-
-        <div class="keyrow">
-          <button>a</button>
-          <button>s</button>
-          <button>d</button>
-          <button>f</button>
-          <button>g</button>
-          <button>h</button>
-          <button>j</button>
-          <button>k</button>
-          <button>l</button>
-        </div>
-        
-        <div class="keyrow">
-          <button>z</button>
-          <button>x</button>
-          <button>c</button>
-          <button>v</button>
-          <button>b</button>
-          <button>n</button>
-          <button>m</button>
-        </div>
-      </div>
-
-      <div id="scoreboard" class="section">
+      <div id="scoreboard">
         <ol>
-          <li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>
-          <li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>
-          <li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>
-          <li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>
-          <li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>
+          <li><img class="lives" src="images/liveHeart.png" height="35px" width="30px"></li>
+          <li><img class="lives" src="images/liveHeart.png" height="35px" width="30px"></li>
+          <li><img class="lives" src="images/liveHeart.png" height="35px" width="30px"></li>
+          <li><img class="lives" src="images/liveHeart.png" height="35px" width="30px"></li>
+          <li><img class="lives" src="images/liveHeart.png" height="35px" width="30px"></li>
         </ol>
       </div>
+
+       <section id="modal">
+        <!-- win modal -->
+        <div id="winModalInner">
+          <h4> Congratulations! <br/> You discovered the phrase. </h4>
+          <p> the answer was: </p>
+          <i><p class="modalPhrase">
+            <!-- phrase -->
+          </p></i>
+          <p> Try again? </p>
+          <button onclick=startGame()> Restart </button>          
+        </div>
+        <!-- lose modal -->
+        <div id="loseModalInner">
+          <h4> Oh no! <br/> You ran out of hearts. </h4>
+          <p> the answer was: </p>
+          <i><p class="modalPhrase">
+            <!-- phrase -->
+          </p></i>
+          <p> Try again? </p>
+          <button onclick=startGame()> Restart </button>          
+        </div>
+       </section>
+
     </div>
     <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>
 
-<!-- to-DO -->
-<!-- !!fix the reboot function so that it doesn't send the page to the start screen -->
-<!-- set a timeout function for the win or lose display -->
-<!-- have animations for the shown letters or the hearts when a life is lost -->
-<!-- animation for shown letters -->
+

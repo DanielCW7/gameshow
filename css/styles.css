@@ -5,7 +5,7 @@
 
 :root {
   --color-win: #78CF82;
-  --color-lose: #D94545;
+  --color-lose: #f45050;
   --color-start: #5b85b7;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
@@ -20,6 +20,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
@@ -31,7 +32,6 @@ body {
 
 li, ol, ul {
   padding: 0;
-  margin-top: 25px;
   display: inline-block;
 }
 
@@ -54,111 +54,128 @@ button {
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
+  cursor: pointer;
 }
-
-
-
 
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-  max-height: 900px;
+  justify-content: space-evenly;
+  height: 100vh;
   text-align: center;
 }
 
-.section {
+#section {
   width: 100%;
   padding: 10px;
 }
-
-/* Title */
 
 .header {
   color: var(--color-start);
 }
 
-/* Phrase */
+.hint_box {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  font-weight: lighter;
+  font-style: italic;
+  max-width: fit-content;
+}
 
 .letter {
-  font-size: var(--font-size-medium);
-  height: 65px;
-  width: 65px;
-  padding: 20px 1px 0 1px;
-  margin-right: 2px;
   color: transparent;
+}
+
+#phrase {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#phrase li {
+  background-color: var(--color-keys-light);
+  border-radius: 5px;
+  margin: 2px;
+  width: 35px;
+  height: 35px;
+  margin-top: auto;
+  align-content: center;
+}
+
+#phrase ul {
+  margin: 10px 10px;
+}
+
+.key {
+  font-size: var(--font-size-medium);
+  vertical-align: text-bottom;
+  height: 45px;
+  width: 45px;
+  font-size: 1rem;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  align-content: space-around;
+  cursor: pointer;
+}
+
+ul.keyrow {
+  display: block;
+  margin: 20px 0px;
 }
 
 .space {
   width: 45px;
 }
 
-.show {
-  color: #fff;
-  background-color: #76CE82;
-  transition-duration: .5s;
-}
-
+.present,
 .punctuation {
-  color: black;
-  background-color: white;
+  color: #fff;
+  background-color: var(--color-win) !important;
   transition-duration: .5s;
-  font-size: 2em;
-  width: 20px;
-}
-
-
-/* Keyboard */
-
-.keyrow {
-  display: flex;
-  justify-content: center;
 }
 
 .chosen {
-  background: var(--color-neutral);
+  background: var(--color-keys);
   border-radius: 5px;
   font-size: var(--font-size-medium);
-  color: #FFFFFF;
+  color: var(--color-keys-light);
   animation-name: pop;
   animation-duration: .2s;
-}
-
-.winPop {
-  animation-name: winPop;
-  animation-duration: .4s;
+  pointer-events: none;
 }
 
 
 /* .chosen & keyframes (named "pop") is the animation used for chosen letters */
 @keyframes pop {
   0% {transform: scale(1);}
-  50% {transform: scale(1.5);}
+  50% {transform: scale(1.2);}
   100% {transform: scale(1);}
 }
 
-@keyframes winPop {
-  0% {transform: translate(0px, 0px);}
-  50% {transform: translate(0px, -20px);}
-  100% {transform: translate(0px, 0px);}
+@keyframes modalPop {
+  0% {transform: scale(.8); opacity: 1;}
+  50% {transform: scale(1.2); opacity: 1;}
+  100% {transform: scale(1); opacity: 1;}
 }
 
-
-
-.btn__reset {
-  padding: 8px;
+#btn_reset {
+  display: block;
+  padding: 5px 15px;
   margin: 50px auto;
   background: #FFFFFF;
   border-radius: 5px;
   font-size: var(--font-size-medium);
+  cursor: pointer;
 }
 
 /* Overlay */
 
-#overlay {
+#overlay,
+#modal {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -168,7 +185,6 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: 5px;
 }
 
 .title {
@@ -183,18 +199,69 @@ button {
   color: var(--color-win);
 }
 
-.win {
-  background-color: var(--color-win);
+
+#modal h4 {
+  font-size: 2rem;
 }
 
-.win a {
-  color: var(--color-win);
+#modal {
+  z-index: 100;
+  background-color: #37474f9d;
+  transition: ease all .3s;
+  transition-delay: .2s;
+  pointer-events: none;
+  opacity: 0;
 }
 
-.lose {
-  background-color: var(--color-lose);
+#winModalInner,
+#loseModalInner {
+  width: 80vw;
+  padding: 20px;
+  margin: auto;
+  border-radius: 20px;
+  position: absolute;
+  height: max-content;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  transform: scale(1);
+  transition: all .5s ease;
+  transition-delay: .2s;
+  animation-delay: .5s;
+  display: block;
+  opacity: 0;
 }
 
-.lose a {
-  color: var(--color-lose);
+#winModalInner { background-color: var(--color-win);}
+#loseModalInner { background-color: var(--color-lose);}
+
+.modalPhrase {
+  text-decoration: underline;
+}
+
+.popup { 
+  animation: modalPop .5s forwards; 
+  opacity: 1;
+}
+
+.lives {
+  transition: ease-in-out all .3s;
+  transition-delay: .1s;
+}
+
+.drop {
+  transform: translateY(50px); 
+  opacity: 0
+}
+
+@media (max-width: 600px) {
+  .key {
+    height: 30px;
+    width: 30px;
+  }
+
+  #section {
+    padding: 5px
+  }
 }
