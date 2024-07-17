@@ -210,11 +210,6 @@ function loseNotice() {
     loseModal.classList.add('popup')
 }
 
-start.addEventListener('click', () => {
-    startOverlay.style.display='none'
-    startGame()
-})
-
 function handleClick(letter) {
     // disables the letter and checks for a match
     chosenLetter = letter.innerHTML;
@@ -222,6 +217,13 @@ function handleClick(letter) {
 
     checkLetter(chosenLetter)
 }
+
+start.addEventListener('click', () => {
+    startOverlay.style.display='none'
+    startGame()
+})
+
+
 
 // // gets random index number from the array and returns the split() phrase
 // const getRandomPhraseAsArray = () => {  
